@@ -1,0 +1,5 @@
+train: /Users/apple/CV/yolo_dataset/images/train
+val: /Users/apple/CV/yolo_dataset/images/val
+
+nc: 6
+names: ['plastic', 'metal', 'glass', 'paper', 'cardboard', 'trash']
