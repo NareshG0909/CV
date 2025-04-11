@@ -118,7 +118,13 @@ def extract_features_from_crop(crop, area):
 
 # --- CV-based classification
 def classify_image_with_cv(uploaded_file):
-    #model = joblib.load("results/cv_rf_model.pkl")
+    # Download all CVClassifier joblib files from Google Drive
+    download_model_from_drive("1pKOuR6iWHIBL_-zpQ8Pi5VsVdd_5w-be", "results/feature_scaler.pkl")
+    download_model_from_drive("1OytHERzN_kIjFdqIDS6mvimk9K81wRgU", "results/label_encoder.pkl")
+   # download_model_from_drive("1FZxVYV4trBEo9pdWRAtUpkElkxUeL3ZK", "results/cv_rf_model.pkl")
+    download_model_from_drive("1_iXX9GbtZBo_PG8C0gW06lUPaUz3JS0C", "results/pca_model.pkl")
+
+    model = joblib.load("results/cv_rf_model.pkl")
     scaler = joblib.load("results/feature_scaler.pkl")
     label_encoder = joblib.load("results/label_encoder.pkl")
     pca = joblib.load("results/pca_model.pkl") if os.path.exists("results/pca_model.pkl") else None
