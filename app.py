@@ -118,7 +118,7 @@ def extract_features_from_crop(crop, area):
 
 # --- CV-based classification
 def classify_image_with_cv(uploaded_file):
-    model = joblib.load("results/cv_rf_model.pkl")
+    #model = joblib.load("results/cv_rf_model.pkl")
     scaler = joblib.load("results/feature_scaler.pkl")
     label_encoder = joblib.load("results/label_encoder.pkl")
     pca = joblib.load("results/pca_model.pkl") if os.path.exists("results/pca_model.pkl") else None
