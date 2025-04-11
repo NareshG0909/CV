@@ -107,4 +107,4 @@ matplotlib
 joblib
 ultralytics
 opencv-python
-sklearn-image
+scikit-image
