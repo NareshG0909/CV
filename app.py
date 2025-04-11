@@ -145,7 +145,7 @@ def classify_image_with_cv(uploaded_file):
         if area < 1000:
             continue
         crop = image[y:y+h, x:x+w]
-        features = extract_features_from_crop(crop, area)
+        features = extract_features_from_crop(crop, area)[:13]  # Trim to match scaler
         features = np.asarray(features).reshape(1, -1)
         if features.shape[1] != scaler.n_features_in_:
             st.warning(f"Feature dimension mismatch: expected {scaler.n_features_in_}, got {features.shape[1]}")
