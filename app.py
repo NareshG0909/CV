@@ -119,10 +119,10 @@ def extract_features_from_crop(crop, area):
 # --- CV-based classification
 def classify_image_with_cv(uploaded_file):
     # Download all CVClassifier joblib files from Google Drive
-    download_model_from_drive("1pKOuR6iWHIBL_-zpQ8Pi5VsVdd_5w-be", "results/feature_scaler.pkl")
-    download_model_from_drive("1OytHERzN_kIjFdqIDS6mvimk9K81wRgU", "results/label_encoder.pkl")
-    download_model_from_drive("1IQU7pOyvBkar68gKWPfVoEshBK-QmUkw", "results/cv_rf_model.pkl")
-    download_model_from_drive("1_iXX9GbtZBo_PG8C0gW06lUPaUz3JS0C", "results/pca_model.pkl")
+    download_model_from_drive("1vN4C6NE3vjBZL7bViKZxW4_QPeZBnIra", "results/feature_scaler.pkl")
+    download_model_from_drive("1fsKRyYjVw1uyAjVXp1mt8TYWaZXVRLYa", "results/label_encoder.pkl")
+    download_model_from_drive("1FZxVYV4trBEo9pdWRAtUpkElkxUeL3ZK", "results/cv_rf_model.pkl")
+    download_model_from_drive("1ZwKhqFCPAhWqx5dHRWQY0WB46UpgTxLD", "results/pca_model.pkl")
 
     model = joblib.load("results/cv_rf_model.pkl")
     scaler = joblib.load("results/feature_scaler.pkl")
@@ -146,7 +146,11 @@ def classify_image_with_cv(uploaded_file):
             continue
         crop = image[y:y+h, x:x+w]
         features = extract_features_from_crop(crop, area)
-        features_scaled = scaler.transform([features])
+        features = np.asarray(features).reshape(1, -1)
+        if features.shape[1] != scaler.n_features_in_:
+            st.warning(f"Feature dimension mismatch: expected {scaler.n_features_in_}, got {features.shape[1]}")
+            continue
+        features_scaled = scaler.transform(features)
         if pca is not None:
             features_scaled = pca.transform(features_scaled)
         proba = model.predict_proba(features_scaled)[0]
