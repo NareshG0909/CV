@@ -151,7 +151,7 @@ def classify_image_with_cv(uploaded_file):
             st.warning(f"Feature dimension mismatch: expected {scaler.n_features_in_}, got {features.shape[1]}")
             continue
         features_scaled = scaler.transform(features)
-        if pca is not None:
+        if pca is not None and features_scaled.shape[1] == pca.n_features_in_:
             features_scaled = pca.transform(features_scaled)
         proba = model.predict_proba(features_scaled)[0]
         pred_class = np.argmax(proba)
