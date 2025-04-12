@@ -31,7 +31,7 @@ def download_model_from_drive(file_id, output_path):
 @st.cache_resource
 def load_yolo():
     yolo_path = "models/yolo_model_ne.pt"
-    download_model_from_drive("1Zm9ttfL-YdcP6JcMUELRUxZh6oKcy_qC", yolo_path)
+    download_model_from_drive("1702UCd6U6c0E1E23m5HKR43oME55cTmn", yolo_path)
     return YOLO(yolo_path)
 
 # --- Load ResNet/SegNet or CVClassifier model
